@@ -75,7 +75,14 @@ var problem1 = {
    * @return {Array<number>}
    */
   filterDuplicates: function(ary) {
-
+    return ary.reduce(function(memo, element, index, ary) {
+      if(index == 0 || element != ary[index - 1]) {
+        memo.push(element);
+        return memo;
+      } else {
+        return memo;
+      }
+    }, []);
   }
 
 };

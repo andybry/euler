@@ -67,8 +67,8 @@ describe('problem1', function() {
     it('returns 23 when n is 10', function() {
       expect(problem1.solveProblem(10)).toBe(23);
     });
-    xit('returns ? when n is 1000', function() {
-      expect(problem1.solveProblem(1000)).toBe(0);
+    it('returns ? when n is 1000', function() {
+      expect(problem1.solveProblem(1000)).toBe(233168);
     });
   });
 
