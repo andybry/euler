@@ -71,12 +71,17 @@ var problem1 = {
     });
   },
   /**
+   * Filter adjacent duplicate entries from the array
+   *
    * @param ary {Array<number>}
    * @return {Array<number>}
    */
   filterDuplicates: function(ary) {
     return ary.reduce(function(memo, element, index, ary) {
-      if(index == 0 || element != ary[index - 1]) {
+      var isFirst = index == 0;
+      var isDifferentFromPrevious = element != ary[index - 1];
+      var isUnique = isFirst || isDifferentFromPrevious;
+      if(isUnique) {
         memo.push(element);
         return memo;
       } else {
