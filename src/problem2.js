@@ -43,7 +43,7 @@ var problem2 = {
   },
   /**
    * @param ary {Array<number>}
-   * @return {Array<number>}
+   * @return {number}
    */
   sumArray: function (ary) {
     return ary.reduce(function(memo, element) {
