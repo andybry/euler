@@ -1,52 +1,37 @@
 describe('problem3', function() {
 
   describe('solveProblem', function() {
-    it('finds the factors of n, calculates primes and returns the largest', function() {
-      spyOn(problem3, 'getFactors').andReturn([2, 4, 5, 10]);
-      spyOn(problem3, 'filterProducts').andReturn([2, 5]);
-      var actual = problem3.solveProblem(20);
-      expect(problem3.getFactors).toHaveBeenCalledWith(20);
-      expect(problem3.filterProducts).toHaveBeenCalledWith([2, 4, 5, 10]);
+    it('finds the largest prime factor of n', function() {
+      spyOn(problem3, 'removeAllFactorsOf').andCallFake(function(num, n) {
+        switch(n) {
+          case 2: return 15; // num = 120 at start
+          case 3: return 5; // num = 15 at start
+          case 4: return 5; // num = 5 at start
+          case 5: return 1; // num = 5 at start
+        }
+      });
+      var actual = problem3.solveProblem(120);
+      expect(problem3.removeAllFactorsOf).toHaveBeenCalledWith(120, 2);
+      expect(problem3.removeAllFactorsOf).toHaveBeenCalledWith(15, 3);
+      expect(problem3.removeAllFactorsOf).toHaveBeenCalledWith(5, 4);
+      expect(problem3.removeAllFactorsOf).toHaveBeenCalledWith(5, 5);
       expect(actual).toBe(5);
     });
   });
   
-  describe('getFactors', function() {
-    it('returns the array of factors of n', function() {
-      expect(problem3.getFactors(20)).toEqual([2, 4, 5, 10]);
-    });
+  describe('remove all factors of a given factor from the product', function() {
+    expect(problem3.removeAllFactorsOf(54, 3)).toBe(2); // 54 = 2 * 3 ^ 3
   });
-  
-  describe('filterProducts', function() {
-    it('removes all elements which are divisible by integers (non primes)', function() {
-      spyOn(problem3, 'filterProductsOf').andCallFake(function(ary, num) {
-        switch(num) {
-          case 2: return [2, 5];
-          case 3: return [2, 5];
-          case 4: return [2, 5];
-          case 5: return [2, 5];
-        }
-      });
-      expect(problem3.filterProducts([2, 4, 5, 6])).toEqual([2, 5]);
-    });
-  });
-  
-  describe('filterProductsOf', function() {
-    it('removes all multiples of the number from the array apart from itself', function() {
-      expect(problem3.filterProductsOf([3, 4, 5, 6, 7], 3)).toEqual([3, 4, 5, 7]);
-    });
-  });
-  
+
   describe('integration tests', function() {
     describe('when n is 13195', function() {
       it('returns 29 (the largest of 5, 7, 13, 29)', function() {
         expect(problem3.solveProblem(13195)).toBe(29);
       });
     });
-    // TODO: improve algorithm so that it can be run against this
-    xdescribe('when n is 600851475143', function() {
+    describe('when n is 600851475143', function() {
       it('returns ?', function() {
-        expect(problem3.solveProblem(600851475143)).toBe(0);
+        expect(problem3.solveProblem(600851475143)).toBe(6857);
       });
     });
   });
