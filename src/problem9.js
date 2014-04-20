@@ -59,7 +59,7 @@ var problem9 = {
    * calculates all the monotonic increasing pairs up
    * to the given number
    *
-   * @param {string} number
+   * @param {number} number
    * @return {Array<Array<number>>} array of strict monotonic tuples
    */
   monotonicPairs: function(number) {
